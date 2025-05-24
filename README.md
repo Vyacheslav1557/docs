@@ -7,6 +7,8 @@ Screenshots, illustrations and explanations included.
 I poured a lot of effort into this project, which is deeply rooted in a personal story from my life.
 Writing the documentation now feels like sharing a piece of that journey.
 
+### Table of contents
+
 1. [The story of the Gate system](#the-story-of-the-gate-system)
     * [Introduction](#introduction)
     * [From the old, gray past](#from-the-old-gray-past)
@@ -20,6 +22,14 @@ Writing the documentation now feels like sharing a piece of that journey.
     * [Authentication and Authorization](#authentication-and-authorization)
     * [Real-time updates](#real-time-updates)
     * [Testing solutions](#testing-solutions)
+
+### Project repositories
+
+* [Tester](https://github.com/Vyacheslav1557/tester) - backend
+* [Gate](https://github.com/Vyacheslav1557/gate) - frontend
+* [Contracts](https://github.com/Vyacheslav1557/contracts) - openapi3 contract
+* [Images](https://github.com/Vyacheslav1557/images) - runtime environment
+* [Docs](https://github.com/Vyacheslav1557/docs) - you are here
 
 # The story of the Gate system
 
@@ -151,7 +161,6 @@ A new service for archiving the schedule. Our regional school schedule system is
 So there must be a way to save the schedule and access it when needed.
 
 ![Schedule](images/schedule-service-desktop-ui.png)
-
 
 # It seems to be easy - but it's not
 
