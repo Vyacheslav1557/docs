@@ -138,7 +138,6 @@ At the time of writing this (23.05.2023), the following is planned:
 #### Gate:
 
 * Integrate monitoring tools (prometheus, grafana)
-* Improve UI so the mobile users can get the same support
 
 #### Courses:
 
