@@ -25,8 +25,9 @@ Writing the documentation now feels like sharing a piece of that journey.
 
 ### Project repositories
 
-* [Tester](https://github.com/Vyacheslav1557/tester) - backend
+* [Tester](https://github.com/Vyacheslav1557/tester) - main backend service
 * [Gate](https://github.com/Vyacheslav1557/gate) - frontend
+* [Observer](https://github.com/Vyacheslav1557/observer) - websocket service
 * [Contracts](https://github.com/Vyacheslav1557/contracts) - openapi3 contract
 * [Images](https://github.com/Vyacheslav1557/images) - runtime environment
 * [Docs](https://github.com/Vyacheslav1557/docs) - you are here
@@ -38,7 +39,7 @@ Writing the documentation now feels like sharing a piece of that journey.
 The Gate system is a platform for competitive programming.
 It provides a user-friendly interface called [Gate](https://github.com/Vyacheslav1557/gate) written in nextjs,
 typescript.
-The whole system is based on a built from scratch RESTful API and Websocket API
+The whole system is based on a built from scratch RESTful API
 called [Tester](https://github.com/Vyacheslav1557/tester) written in Go.
 It includes [feature-rich LaTeX support](#latex-tables)
 for problem statements, resource management, execution of solutions, real-time updates, sessions and much more.
@@ -70,7 +71,7 @@ Here's a screenshot of the old Gate interface (Problem page):
 ## In simple words
 
 There are two main services: Gate and Tester. Gate is a user interface for Tester.
-Tester is the core, the backend, RESTful API and Websocket API.
+Tester is the core, the backend, RESTful API. There is also a third service for websockets called Observer.
 
 The Gate service basically provides a user interface for the Tester service.
 It wraps raw data in a React application and provides a user-friendly interface.
@@ -81,11 +82,11 @@ Tester provides a set of endpoints for managing problems, solutions, contests, u
 
 ### Tester
 
-As mentioned, the Tester in written in Go. It is a RESTful API and Websocket API.
+As mentioned, the Tester in written in Go. It is a RESTful API.
 
 It uses openapi3 to define the API. Tester is written in Clean Architecture style, so it is easy to understand and
 maintain. Independent components can be decoupled from each other. For example, all the auth logic can be moved to
-another service as well as the notifications via websocket. It uses RBAC for authorization.
+another service as well as the notifications via websocket (done in Observer). It uses RBAC for authorization.
 
 Tester includes a feature-rich LaTeX support for problem statements based on Pandoc. When user edits a problem
 statement,
@@ -96,10 +97,12 @@ All the relatively small data (users, contests, problems, solutions) is stored i
 Tester provides CRUD endpoints for these resources. All the tests (large data) is stored in S3 (seaweedfs).
 User sessions (auth) can change frequently, so they are stored in Valkey (Redis fork).
 
+Docker is used to evaluate solutions in an isolated environment.
+
+### Observer
+
 The websocket API is used for real-time solution updates notifications. So the user can see the results of his solution
 immediately. Without needing to reload the page.
-
-Docker is used to evaluate solutions in an isolated environment.
 
 ### Gate
 
@@ -179,7 +182,7 @@ Session is transported as JWT token, so the nextjs server can get user info from
 
 ## Real-time updates
 
-Tester uses Websocket API for real-time updates.
+Observer uses Websocket API for real-time updates. Tester and Observer communicate via NATS.
 So the user can see the results of his solution immediately.
 The messaging contract was developed from scratch.
 It uses self-written solution state monitoring logic.
